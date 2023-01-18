@@ -567,6 +567,7 @@ message PermissioningPoll {
     string serverAddress = 8;
     string serverVersion = 9;
     repeated ClientError ClientErrors = 10; // Client error information
+    bytes Ed25519 = 11;
 }
 
 
