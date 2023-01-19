@@ -359,6 +359,7 @@ message Slot {
     bytes PayloadB = 9; // Len(Prime) bit length payload B (contains part of encrypted payload, and associated data)
     bytes Salt = 10; // Salt to identify message key
     repeated bytes KMACs = 11; // Individual Key MAC for each node in network
+    bytes Ed25519 = 12;
 }
 
 // Unified Client->Gateway polling message
