@@ -12,7 +12,7 @@ require (
 	gitlab.com/elixxir/primitives v0.0.3-0.20230109222259-f62b2a90b62c
 	gitlab.com/xx_network/comms v0.0.4-0.20230113193654-a3a18c6bbb90
 	gitlab.com/xx_network/crypto v0.0.5-0.20230113190331-06f2eb12b97f
-	gitlab.com/xx_network/primitives v0.0.4-0.20230120192639-f457e2ff15d7
+	gitlab.com/xx_network/primitives v0.0.4-0.20230203171907-f22171f9374c
 	gitlab.com/xx_network/ring v0.0.3-0.20220902183151-a7d3b15bc981
 	golang.org/x/crypto v0.5.0
 	golang.org/x/net v0.5.0
