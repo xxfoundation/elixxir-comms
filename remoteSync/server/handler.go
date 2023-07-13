@@ -30,11 +30,11 @@ type Comms struct {
 
 // Handler describes the endpoint callbacks for remote sync.
 type Handler interface {
-	Read(*pb.RSReadRequest) (*pb.RSReadResponse, error)
-	Write(*pb.RSWriteRequest) (*pb.RSWriteResponse, error)
-	GetLastModified(*pb.RSReadRequest) (*pb.RSTimestampResponse, error)
-	GetLastWrite(*messages.Ack) (*pb.RSTimestampResponse, error)
-	ReadDir(*pb.RSReadRequest) (*pb.RSReadDirResponse, error)
+	Read(*pb.RsReadRequest) (*pb.RsReadResponse, error)
+	Write(*pb.RsWriteRequest) (*pb.RsWriteResponse, error)
+	GetLastModified(*pb.RsReadRequest) (*pb.RsTimestampResponse, error)
+	GetLastWrite(*messages.Ack) (*pb.RsTimestampResponse, error)
+	ReadDir(*pb.RsReadRequest) (*pb.RsReadDirResponse, error)
 }
 
 // StartRemoteSync starts a new RemoteSync server on the address:port specified by localServer
@@ -63,11 +63,11 @@ func StartRemoteSync(id *id.ID, localServer string, handler Handler,
 
 // implementationFunctions for the Handler interface.
 type implementationFunctions struct {
-	Read            func(*pb.RSReadRequest) (*pb.RSReadResponse, error)
-	Write           func(*pb.RSWriteRequest) (*pb.RSWriteResponse, error)
-	GetLastModified func(*pb.RSReadRequest) (*pb.RSTimestampResponse, error)
-	GetLastWrite    func(*messages.Ack) (*pb.RSTimestampResponse, error)
-	ReadDir         func(*pb.RSReadRequest) (*pb.RSReadDirResponse, error)
+	Read            func(*pb.RsReadRequest) (*pb.RsReadResponse, error)
+	Write           func(*pb.RsWriteRequest) (*pb.RsWriteResponse, error)
+	GetLastModified func(*pb.RsReadRequest) (*pb.RsTimestampResponse, error)
+	GetLastWrite    func(*messages.Ack) (*pb.RsTimestampResponse, error)
+	ReadDir         func(*pb.RsReadRequest) (*pb.RsReadDirResponse, error)
 }
 
 // Implementation allows users of the client library to set the
@@ -85,42 +85,42 @@ func NewImplementation() *Implementation {
 	}
 	return &Implementation{
 		Functions: implementationFunctions{
-			Read: func(*pb.RSReadRequest) (*pb.RSReadResponse, error) {
+			Read: func(*pb.RsReadRequest) (*pb.RsReadResponse, error) {
 				warn(um)
-				return new(pb.RSReadResponse), nil
+				return new(pb.RsReadResponse), nil
 			},
-			Write: func(*pb.RSWriteRequest) (*pb.RSWriteResponse, error) {
+			Write: func(*pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
 				warn(um)
-				return new(pb.RSWriteResponse), nil
+				return new(pb.RsWriteResponse), nil
 			},
-			GetLastModified: func(*pb.RSReadRequest) (*pb.RSTimestampResponse, error) {
+			GetLastModified: func(*pb.RsReadRequest) (*pb.RsTimestampResponse, error) {
 				warn(um)
-				return new(pb.RSTimestampResponse), nil
+				return new(pb.RsTimestampResponse), nil
 			},
-			GetLastWrite: func(*messages.Ack) (*pb.RSTimestampResponse, error) {
+			GetLastWrite: func(*messages.Ack) (*pb.RsTimestampResponse, error) {
 				warn(um)
-				return new(pb.RSTimestampResponse), nil
+				return new(pb.RsTimestampResponse), nil
 			},
-			ReadDir: func(*pb.RSReadRequest) (*pb.RSReadDirResponse, error) {
+			ReadDir: func(*pb.RsReadRequest) (*pb.RsReadDirResponse, error) {
 				warn(um)
-				return new(pb.RSReadDirResponse), nil
+				return new(pb.RsReadDirResponse), nil
 			},
 		},
 	}
 }
 
-func (s *Implementation) Read(message *pb.RSReadRequest) (*pb.RSReadResponse, error) {
+func (s *Implementation) Read(message *pb.RsReadRequest) (*pb.RsReadResponse, error) {
 	return s.Functions.Read(message)
 }
-func (s *Implementation) Write(message *pb.RSWriteRequest) (*pb.RSWriteResponse, error) {
+func (s *Implementation) Write(message *pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
 	return s.Functions.Write(message)
 }
-func (s *Implementation) GetLastModified(message *pb.RSReadRequest) (*pb.RSTimestampResponse, error) {
+func (s *Implementation) GetLastModified(message *pb.RsReadRequest) (*pb.RsTimestampResponse, error) {
 	return s.Functions.GetLastModified(message)
 }
-func (s *Implementation) GetLastWrite(message *messages.Ack) (*pb.RSTimestampResponse, error) {
+func (s *Implementation) GetLastWrite(message *messages.Ack) (*pb.RsTimestampResponse, error) {
 	return s.Functions.GetLastWrite(message)
 }
-func (s *Implementation) ReadDir(message *pb.RSReadRequest) (*pb.RSReadDirResponse, error) {
+func (s *Implementation) ReadDir(message *pb.RsReadRequest) (*pb.RsReadDirResponse, error) {
 	return s.Functions.ReadDir(message)
 }

@@ -16,26 +16,26 @@ import (
 )
 
 // Read data from the server
-func (rc *Comms) Read(ctx context.Context, message *pb.RSReadRequest) (*pb.RSReadResponse, error) {
+func (rc *Comms) Read(ctx context.Context, message *pb.RsReadRequest) (*pb.RsReadResponse, error) {
 	return rc.handler.Read(message)
 }
 
 // Write data to the server
-func (rc *Comms) Write(ctx context.Context, message *pb.RSWriteRequest) (*pb.RSWriteResponse, error) {
+func (rc *Comms) Write(ctx context.Context, message *pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
 	return rc.handler.Write(message)
 }
 
 // GetLastModified returns the last time a resource was modified
-func (rc *Comms) GetLastModified(ctx context.Context, message *pb.RSReadRequest) (*pb.RSTimestampResponse, error) {
+func (rc *Comms) GetLastModified(ctx context.Context, message *pb.RsReadRequest) (*pb.RsTimestampResponse, error) {
 	return rc.handler.GetLastModified(message)
 }
 
 // GetLastWrite returns the last time this remote sync server was modified
-func (rc *Comms) GetLastWrite(ctx context.Context, message *messages.Ack) (*pb.RSTimestampResponse, error) {
+func (rc *Comms) GetLastWrite(ctx context.Context, message *messages.Ack) (*pb.RsTimestampResponse, error) {
 	return rc.handler.GetLastWrite(message)
 }
 
 // ReadDir reads a directory from the server
-func (rc *Comms) ReadDir(ctx context.Context, message *pb.RSReadRequest) (*pb.RSReadDirResponse, error) {
+func (rc *Comms) ReadDir(ctx context.Context, message *pb.RsReadRequest) (*pb.RsReadDirResponse, error) {
 	return rc.handler.ReadDir(message)
 }

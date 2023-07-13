@@ -2515,11 +2515,11 @@ var Authorizer_ServiceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RemoteSyncClient interface {
-	Read(ctx context.Context, in *RSReadRequest, opts ...grpc.CallOption) (*RSReadResponse, error)
-	Write(ctx context.Context, in *RSWriteRequest, opts ...grpc.CallOption) (*RSWriteResponse, error)
-	GetLastModified(ctx context.Context, in *RSReadRequest, opts ...grpc.CallOption) (*RSTimestampResponse, error)
-	GetLastWrite(ctx context.Context, in *messages.Ack, opts ...grpc.CallOption) (*RSTimestampResponse, error)
-	ReadDir(ctx context.Context, in *RSReadRequest, opts ...grpc.CallOption) (*RSReadDirResponse, error)
+	Read(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsReadResponse, error)
+	Write(ctx context.Context, in *RsWriteRequest, opts ...grpc.CallOption) (*RsWriteResponse, error)
+	GetLastModified(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsTimestampResponse, error)
+	GetLastWrite(ctx context.Context, in *messages.Ack, opts ...grpc.CallOption) (*RsTimestampResponse, error)
+	ReadDir(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsReadDirResponse, error)
 }
 
 type remoteSyncClient struct {
@@ -2530,8 +2530,8 @@ func NewRemoteSyncClient(cc grpc.ClientConnInterface) RemoteSyncClient {
 	return &remoteSyncClient{cc}
 }
 
-func (c *remoteSyncClient) Read(ctx context.Context, in *RSReadRequest, opts ...grpc.CallOption) (*RSReadResponse, error) {
-	out := new(RSReadResponse)
+func (c *remoteSyncClient) Read(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsReadResponse, error) {
+	out := new(RsReadResponse)
 	err := c.cc.Invoke(ctx, "/mixmessages.RemoteSync/Read", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2539,8 +2539,8 @@ func (c *remoteSyncClient) Read(ctx context.Context, in *RSReadRequest, opts ...
 	return out, nil
 }
 
-func (c *remoteSyncClient) Write(ctx context.Context, in *RSWriteRequest, opts ...grpc.CallOption) (*RSWriteResponse, error) {
-	out := new(RSWriteResponse)
+func (c *remoteSyncClient) Write(ctx context.Context, in *RsWriteRequest, opts ...grpc.CallOption) (*RsWriteResponse, error) {
+	out := new(RsWriteResponse)
 	err := c.cc.Invoke(ctx, "/mixmessages.RemoteSync/Write", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2548,8 +2548,8 @@ func (c *remoteSyncClient) Write(ctx context.Context, in *RSWriteRequest, opts .
 	return out, nil
 }
 
-func (c *remoteSyncClient) GetLastModified(ctx context.Context, in *RSReadRequest, opts ...grpc.CallOption) (*RSTimestampResponse, error) {
-	out := new(RSTimestampResponse)
+func (c *remoteSyncClient) GetLastModified(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsTimestampResponse, error) {
+	out := new(RsTimestampResponse)
 	err := c.cc.Invoke(ctx, "/mixmessages.RemoteSync/GetLastModified", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2557,8 +2557,8 @@ func (c *remoteSyncClient) GetLastModified(ctx context.Context, in *RSReadReques
 	return out, nil
 }
 
-func (c *remoteSyncClient) GetLastWrite(ctx context.Context, in *messages.Ack, opts ...grpc.CallOption) (*RSTimestampResponse, error) {
-	out := new(RSTimestampResponse)
+func (c *remoteSyncClient) GetLastWrite(ctx context.Context, in *messages.Ack, opts ...grpc.CallOption) (*RsTimestampResponse, error) {
+	out := new(RsTimestampResponse)
 	err := c.cc.Invoke(ctx, "/mixmessages.RemoteSync/GetLastWrite", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2566,8 +2566,8 @@ func (c *remoteSyncClient) GetLastWrite(ctx context.Context, in *messages.Ack, o
 	return out, nil
 }
 
-func (c *remoteSyncClient) ReadDir(ctx context.Context, in *RSReadRequest, opts ...grpc.CallOption) (*RSReadDirResponse, error) {
-	out := new(RSReadDirResponse)
+func (c *remoteSyncClient) ReadDir(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsReadDirResponse, error) {
+	out := new(RsReadDirResponse)
 	err := c.cc.Invoke(ctx, "/mixmessages.RemoteSync/ReadDir", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2579,11 +2579,11 @@ func (c *remoteSyncClient) ReadDir(ctx context.Context, in *RSReadRequest, opts 
 // All implementations must embed UnimplementedRemoteSyncServer
 // for forward compatibility
 type RemoteSyncServer interface {
-	Read(context.Context, *RSReadRequest) (*RSReadResponse, error)
-	Write(context.Context, *RSWriteRequest) (*RSWriteResponse, error)
-	GetLastModified(context.Context, *RSReadRequest) (*RSTimestampResponse, error)
-	GetLastWrite(context.Context, *messages.Ack) (*RSTimestampResponse, error)
-	ReadDir(context.Context, *RSReadRequest) (*RSReadDirResponse, error)
+	Read(context.Context, *RsReadRequest) (*RsReadResponse, error)
+	Write(context.Context, *RsWriteRequest) (*RsWriteResponse, error)
+	GetLastModified(context.Context, *RsReadRequest) (*RsTimestampResponse, error)
+	GetLastWrite(context.Context, *messages.Ack) (*RsTimestampResponse, error)
+	ReadDir(context.Context, *RsReadRequest) (*RsReadDirResponse, error)
 	mustEmbedUnimplementedRemoteSyncServer()
 }
 
@@ -2591,19 +2591,19 @@ type RemoteSyncServer interface {
 type UnimplementedRemoteSyncServer struct {
 }
 
-func (UnimplementedRemoteSyncServer) Read(context.Context, *RSReadRequest) (*RSReadResponse, error) {
+func (UnimplementedRemoteSyncServer) Read(context.Context, *RsReadRequest) (*RsReadResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
 }
-func (UnimplementedRemoteSyncServer) Write(context.Context, *RSWriteRequest) (*RSWriteResponse, error) {
+func (UnimplementedRemoteSyncServer) Write(context.Context, *RsWriteRequest) (*RsWriteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Write not implemented")
 }
-func (UnimplementedRemoteSyncServer) GetLastModified(context.Context, *RSReadRequest) (*RSTimestampResponse, error) {
+func (UnimplementedRemoteSyncServer) GetLastModified(context.Context, *RsReadRequest) (*RsTimestampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastModified not implemented")
 }
-func (UnimplementedRemoteSyncServer) GetLastWrite(context.Context, *messages.Ack) (*RSTimestampResponse, error) {
+func (UnimplementedRemoteSyncServer) GetLastWrite(context.Context, *messages.Ack) (*RsTimestampResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastWrite not implemented")
 }
-func (UnimplementedRemoteSyncServer) ReadDir(context.Context, *RSReadRequest) (*RSReadDirResponse, error) {
+func (UnimplementedRemoteSyncServer) ReadDir(context.Context, *RsReadRequest) (*RsReadDirResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadDir not implemented")
 }
 func (UnimplementedRemoteSyncServer) mustEmbedUnimplementedRemoteSyncServer() {}
@@ -2620,7 +2620,7 @@ func RegisterRemoteSyncServer(s grpc.ServiceRegistrar, srv RemoteSyncServer) {
 }
 
 func _RemoteSync_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RSReadRequest)
+	in := new(RsReadRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2632,13 +2632,13 @@ func _RemoteSync_Read_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/mixmessages.RemoteSync/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RemoteSyncServer).Read(ctx, req.(*RSReadRequest))
+		return srv.(RemoteSyncServer).Read(ctx, req.(*RsReadRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _RemoteSync_Write_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RSWriteRequest)
+	in := new(RsWriteRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2650,13 +2650,13 @@ func _RemoteSync_Write_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/mixmessages.RemoteSync/Write",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RemoteSyncServer).Write(ctx, req.(*RSWriteRequest))
+		return srv.(RemoteSyncServer).Write(ctx, req.(*RsWriteRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _RemoteSync_GetLastModified_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RSReadRequest)
+	in := new(RsReadRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2668,7 +2668,7 @@ func _RemoteSync_GetLastModified_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/mixmessages.RemoteSync/GetLastModified",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RemoteSyncServer).GetLastModified(ctx, req.(*RSReadRequest))
+		return srv.(RemoteSyncServer).GetLastModified(ctx, req.(*RsReadRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2692,7 +2692,7 @@ func _RemoteSync_GetLastWrite_Handler(srv interface{}, ctx context.Context, dec 
 }
 
 func _RemoteSync_ReadDir_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RSReadRequest)
+	in := new(RsReadRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2704,7 +2704,7 @@ func _RemoteSync_ReadDir_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/mixmessages.RemoteSync/ReadDir",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RemoteSyncServer).ReadDir(ctx, req.(*RSReadRequest))
+		return srv.(RemoteSyncServer).ReadDir(ctx, req.(*RsReadRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

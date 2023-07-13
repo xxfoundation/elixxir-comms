@@ -875,37 +875,37 @@ message AuthorizerAuth{
 
 
 service RemoteSync{
-    rpc Read(RSReadRequest) returns (RSReadResponse);
-    rpc Write(RSWriteRequest) returns (RSWriteResponse);
-    rpc GetLastModified(RSReadRequest) returns (RSTimestampResponse);
-    rpc GetLastWrite(messages.Ack) returns (RSTimestampResponse);
-    rpc ReadDir(RSReadRequest) returns (RSReadDirResponse);
+    rpc Read(RsReadRequest) returns (RsReadResponse);
+    rpc Write(RsWriteRequest) returns (RsWriteResponse);
+    rpc GetLastModified(RsReadRequest) returns (RsTimestampResponse);
+    rpc GetLastWrite(messages.Ack) returns (RsTimestampResponse);
+    rpc ReadDir(RsReadRequest) returns (RsReadDirResponse);
 }
 
-message RSReadRequest{
+message RsReadRequest{
     string Path = 1;
 }
 
-message RSReadResponse{
+message RsReadResponse{
     bytes Data = 1;
     string Error = 2;
 }
 
-message RSWriteRequest{
+message RsWriteRequest{
     string Path = 1;
     bytes Data = 2;
 }
 
-message RSWriteResponse{
+message RsWriteResponse{
     string Error = 1;
 }
 
-message RSReadDirResponse {
+message RsReadDirResponse {
     repeated string Data = 1;
     string Error = 2;
 }
 
-message RSTimestampResponse{
+message RsTimestampResponse{
     int64 Timestamp = 1;
     string Error = 2;
 }

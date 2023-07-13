@@ -10,7 +10,7 @@ import (
 )
 
 // Read a resource from a RemoteSync server.
-func (rc *Comms) Read(host *connect.Host, msg *pb.RSReadRequest) (*pb.RSReadResponse, error) {
+func (rc *Comms) Read(host *connect.Host, msg *pb.RsReadRequest) (*pb.RsReadResponse, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
@@ -32,12 +32,12 @@ func (rc *Comms) Read(host *connect.Host, msg *pb.RSReadRequest) (*pb.RSReadResp
 	}
 
 	// Marshall the result
-	result := &pb.RSReadResponse{}
+	result := &pb.RsReadResponse{}
 	return result, ptypes.UnmarshalAny(resultMsg, result)
 }
 
 // Write data to a path at a RemoteSync server
-func (rc *Comms) Write(host *connect.Host, msg *pb.RSWriteRequest) (*pb.RSWriteResponse, error) {
+func (rc *Comms) Write(host *connect.Host, msg *pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
@@ -59,12 +59,12 @@ func (rc *Comms) Write(host *connect.Host, msg *pb.RSWriteRequest) (*pb.RSWriteR
 	}
 
 	// Marshall the result
-	result := &pb.RSWriteResponse{}
+	result := &pb.RsWriteResponse{}
 	return result, ptypes.UnmarshalAny(resultMsg, result)
 }
 
 // GetLastModified returns the last time a path was modified.
-func (rc *Comms) GetLastModified(host *connect.Host, msg *pb.RSReadRequest) (*pb.RSTimestampResponse, error) {
+func (rc *Comms) GetLastModified(host *connect.Host, msg *pb.RsReadRequest) (*pb.RsTimestampResponse, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
@@ -86,12 +86,12 @@ func (rc *Comms) GetLastModified(host *connect.Host, msg *pb.RSReadRequest) (*pb
 	}
 
 	// Marshall the result
-	result := &pb.RSTimestampResponse{}
+	result := &pb.RsTimestampResponse{}
 	return result, ptypes.UnmarshalAny(resultMsg, result)
 }
 
 // GetLastWrite returns the last time a remote sync server was modified.
-func (rc *Comms) GetLastWrite(host *connect.Host, msg *messages.Ack) (*pb.RSTimestampResponse, error) {
+func (rc *Comms) GetLastWrite(host *connect.Host, msg *messages.Ack) (*pb.RsTimestampResponse, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
@@ -113,12 +113,12 @@ func (rc *Comms) GetLastWrite(host *connect.Host, msg *messages.Ack) (*pb.RSTime
 	}
 
 	// Marshall the result
-	result := &pb.RSTimestampResponse{}
+	result := &pb.RsTimestampResponse{}
 	return result, ptypes.UnmarshalAny(resultMsg, result)
 }
 
 // ReadDir returns all entries in a given path.
-func (rc *Comms) ReadDir(host *connect.Host, msg *pb.RSReadRequest) (*pb.RSReadDirResponse, error) {
+func (rc *Comms) ReadDir(host *connect.Host, msg *pb.RsReadRequest) (*pb.RsReadDirResponse, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
@@ -140,6 +140,6 @@ func (rc *Comms) ReadDir(host *connect.Host, msg *pb.RSReadRequest) (*pb.RSReadD
 	}
 
 	// Marshall the result
-	result := &pb.RSReadDirResponse{}
+	result := &pb.RsReadDirResponse{}
 	return result, ptypes.UnmarshalAny(resultMsg, result)
 }
