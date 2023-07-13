@@ -29,10 +29,11 @@ type Comms struct {
 
 // Handler describes the endpoint callbacks for remote sync.
 type Handler interface {
+	Login(*pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error)
 	Read(*pb.RsReadRequest) (*pb.RsReadResponse, error)
 	Write(*pb.RsWriteRequest) (*pb.RsWriteResponse, error)
 	GetLastModified(*pb.RsReadRequest) (*pb.RsTimestampResponse, error)
-	GetLastWrite(*messages.Ack) (*pb.RsTimestampResponse, error)
+	GetLastWrite(*pb.RsLastWriteRequest) (*pb.RsTimestampResponse, error)
 	ReadDir(*pb.RsReadRequest) (*pb.RsReadDirResponse, error)
 }
 
@@ -64,6 +65,7 @@ func StartRemoteSync(id *id.ID, localServer string, handler Handler,
 
 // implementationFunctions for the Handler interface.
 type implementationFunctions struct {
+	Login           func(req *pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error)
 	Read            func(*pb.RsReadRequest) (*pb.RsReadResponse, error)
 	Write           func(*pb.RsWriteRequest) (*pb.RsWriteResponse, error)
 	GetLastModified func(*pb.RsReadRequest) (*pb.RsTimestampResponse, error)
@@ -86,6 +88,10 @@ func NewImplementation() *Implementation {
 	}
 	return &Implementation{
 		Functions: implementationFunctions{
+			Login: func(*pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error) {
+				warn(um)
+				return new(pb.RsAuthenticationResponse), nil
+			},
 			Read: func(*pb.RsReadRequest) (*pb.RsReadResponse, error) {
 				warn(um)
 				return new(pb.RsReadResponse), nil
@@ -108,6 +114,10 @@ func NewImplementation() *Implementation {
 			},
 		},
 	}
+}
+
+func (s *Implementation) Login(message *pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error) {
+	return s.Functions.Login(message)
 }
 
 func (s *Implementation) Read(message *pb.RsReadRequest) (*pb.RsReadResponse, error) {

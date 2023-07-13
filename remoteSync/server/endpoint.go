@@ -11,9 +11,13 @@ package server
 
 import (
 	pb "gitlab.com/elixxir/comms/mixmessages"
-	"gitlab.com/xx_network/comms/messages"
 	"golang.org/x/net/context"
 )
+
+// Login to the server, receiving a token
+func (rc *Comms) Login(ctx context.Context, message *pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error) {
+	return rc.handler.Login(message)
+}
 
 // Read data from the server
 func (rc *Comms) Read(ctx context.Context, message *pb.RsReadRequest) (*pb.RsReadResponse, error) {
@@ -31,7 +35,7 @@ func (rc *Comms) GetLastModified(ctx context.Context, message *pb.RsReadRequest)
 }
 
 // GetLastWrite returns the last time this remote sync server was modified
-func (rc *Comms) GetLastWrite(ctx context.Context, message *messages.Ack) (*pb.RsTimestampResponse, error) {
+func (rc *Comms) GetLastWrite(ctx context.Context, message *pb.RsLastWriteRequest) (*pb.RsTimestampResponse, error) {
 	return rc.handler.GetLastWrite(message)
 }
 

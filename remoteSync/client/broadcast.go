@@ -6,7 +6,6 @@ import (
 	"github.com/pkg/errors"
 	pb "gitlab.com/elixxir/comms/mixmessages"
 	"gitlab.com/xx_network/comms/connect"
-	"gitlab.com/xx_network/comms/messages"
 )
 
 // Read a resource from a RemoteSync server.
@@ -91,7 +90,7 @@ func (rc *Comms) GetLastModified(host *connect.Host, msg *pb.RsReadRequest) (*pb
 }
 
 // GetLastWrite returns the last time a remote sync server was modified.
-func (rc *Comms) GetLastWrite(host *connect.Host, msg *messages.Ack) (*pb.RsTimestampResponse, error) {
+func (rc *Comms) GetLastWrite(host *connect.Host, msg *pb.RsLastWriteRequest) (*pb.RsTimestampResponse, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
