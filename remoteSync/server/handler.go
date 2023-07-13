@@ -13,7 +13,6 @@ import (
 	jww "github.com/spf13/jwalterweatherman"
 	pb "gitlab.com/elixxir/comms/mixmessages"
 	"gitlab.com/xx_network/comms/connect"
-	"gitlab.com/xx_network/comms/gossip"
 	"gitlab.com/xx_network/comms/messages"
 	"gitlab.com/xx_network/primitives/id"
 	"runtime/debug"
@@ -41,7 +40,7 @@ type Handler interface {
 // and a callback interface for remote sync operations
 // with given path to public and private key for TLS connection.
 func StartRemoteSync(id *id.ID, localServer string, handler Handler,
-	certPem, keyPem []byte, gossipFlags gossip.ManagerFlags) *Comms {
+	certPem, keyPem []byte) *Comms {
 
 	// Initialize the low-level comms listeners
 	pc, err := connect.StartCommServer(id, localServer,
@@ -58,6 +57,8 @@ func StartRemoteSync(id *id.ID, localServer string, handler Handler,
 	grpcServer := rsServer.GetServer()
 	pb.RegisterRemoteSyncServer(grpcServer, &rsServer)
 	messages.RegisterGenericServer(grpcServer, &rsServer)
+
+	pc.ServeWithWeb()
 	return &rsServer
 }
 
