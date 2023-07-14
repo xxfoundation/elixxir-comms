@@ -877,19 +877,21 @@ message AuthorizerAuth{
 service RemoteSync{
     rpc Login(RsAuthenticationRequest) returns (RsAuthenticationResponse);
     rpc Read(RsReadRequest) returns (RsReadResponse);
-    rpc Write(RsWriteRequest) returns (RsWriteResponse);
+    rpc Write(RsWriteRequest) returns (messages.Ack);
     rpc GetLastModified(RsReadRequest) returns (RsTimestampResponse);
     rpc GetLastWrite(RsLastWriteRequest) returns (RsTimestampResponse);
     rpc ReadDir(RsReadRequest) returns (RsReadDirResponse);
 }
 
 message RsAuthenticationRequest{
-    string Path = 1;
-    string Password = 2;
+    string Username = 1;
+    bytes PasswordHash = 2;
+    bytes Salt = 3;
 }
 
 message RsAuthenticationResponse{
     string Token = 1;
+    int64  ExpiresAt = 2;
 }
 
 message RsReadRequest{
@@ -903,7 +905,6 @@ message RsLastWriteRequest{
 
 message RsReadResponse{
     bytes Data = 1;
-    string Error = 2;
 }
 
 message RsWriteRequest{
@@ -912,16 +913,10 @@ message RsWriteRequest{
     string Token = 3;
 }
 
-message RsWriteResponse{
-    string Error = 1;
-}
-
 message RsReadDirResponse {
     repeated string Data = 1;
-    string Error = 2;
 }
 
 message RsTimestampResponse{
     int64 Timestamp = 1;
-    string Error = 2;
 }

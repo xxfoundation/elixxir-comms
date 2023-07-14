@@ -6,6 +6,7 @@ import (
 	"github.com/pkg/errors"
 	pb "gitlab.com/elixxir/comms/mixmessages"
 	"gitlab.com/xx_network/comms/connect"
+	"gitlab.com/xx_network/comms/messages"
 )
 
 // Login to the server, receiving an authentication token
@@ -63,7 +64,7 @@ func (rc *Comms) Read(host *connect.Host, msg *pb.RsReadRequest) (*pb.RsReadResp
 }
 
 // Write data to a path at a RemoteSync server
-func (rc *Comms) Write(host *connect.Host, msg *pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
+func (rc *Comms) Write(host *connect.Host, msg *pb.RsWriteRequest) (*messages.Ack, error) {
 	// Create the Send Function
 	f := func(conn connect.Connection) (*any.Any, error) {
 		// Set up the context
@@ -85,7 +86,7 @@ func (rc *Comms) Write(host *connect.Host, msg *pb.RsWriteRequest) (*pb.RsWriteR
 	}
 
 	// Marshall the result
-	result := &pb.RsWriteResponse{}
+	result := &messages.Ack{}
 	return result, ptypes.UnmarshalAny(resultMsg, result)
 }
 

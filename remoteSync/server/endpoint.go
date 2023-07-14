@@ -11,6 +11,7 @@ package server
 
 import (
 	pb "gitlab.com/elixxir/comms/mixmessages"
+	"gitlab.com/xx_network/comms/messages"
 	"golang.org/x/net/context"
 )
 
@@ -25,7 +26,7 @@ func (rc *Comms) Read(ctx context.Context, message *pb.RsReadRequest) (*pb.RsRea
 }
 
 // Write data to the server
-func (rc *Comms) Write(ctx context.Context, message *pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
+func (rc *Comms) Write(ctx context.Context, message *pb.RsWriteRequest) (*messages.Ack, error) {
 	return rc.handler.Write(message)
 }
 

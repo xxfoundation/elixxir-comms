@@ -31,7 +31,7 @@ type Comms struct {
 type Handler interface {
 	Login(*pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error)
 	Read(*pb.RsReadRequest) (*pb.RsReadResponse, error)
-	Write(*pb.RsWriteRequest) (*pb.RsWriteResponse, error)
+	Write(*pb.RsWriteRequest) (*messages.Ack, error)
 	GetLastModified(*pb.RsReadRequest) (*pb.RsTimestampResponse, error)
 	GetLastWrite(*pb.RsLastWriteRequest) (*pb.RsTimestampResponse, error)
 	ReadDir(*pb.RsReadRequest) (*pb.RsReadDirResponse, error)
@@ -67,7 +67,7 @@ func StartRemoteSync(id *id.ID, localServer string, handler Handler,
 type implementationFunctions struct {
 	Login           func(req *pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error)
 	Read            func(*pb.RsReadRequest) (*pb.RsReadResponse, error)
-	Write           func(*pb.RsWriteRequest) (*pb.RsWriteResponse, error)
+	Write           func(*pb.RsWriteRequest) (*messages.Ack, error)
 	GetLastModified func(*pb.RsReadRequest) (*pb.RsTimestampResponse, error)
 	GetLastWrite    func(*messages.Ack) (*pb.RsTimestampResponse, error)
 	ReadDir         func(*pb.RsReadRequest) (*pb.RsReadDirResponse, error)
@@ -96,9 +96,9 @@ func NewImplementation() *Implementation {
 				warn(um)
 				return new(pb.RsReadResponse), nil
 			},
-			Write: func(*pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
+			Write: func(*pb.RsWriteRequest) (*messages.Ack, error) {
 				warn(um)
-				return new(pb.RsWriteResponse), nil
+				return new(messages.Ack), nil
 			},
 			GetLastModified: func(*pb.RsReadRequest) (*pb.RsTimestampResponse, error) {
 				warn(um)
@@ -123,7 +123,7 @@ func (s *Implementation) Login(message *pb.RsAuthenticationRequest) (*pb.RsAuthe
 func (s *Implementation) Read(message *pb.RsReadRequest) (*pb.RsReadResponse, error) {
 	return s.Functions.Read(message)
 }
-func (s *Implementation) Write(message *pb.RsWriteRequest) (*pb.RsWriteResponse, error) {
+func (s *Implementation) Write(message *pb.RsWriteRequest) (*messages.Ack, error) {
 	return s.Functions.Write(message)
 }
 func (s *Implementation) GetLastModified(message *pb.RsReadRequest) (*pb.RsTimestampResponse, error) {

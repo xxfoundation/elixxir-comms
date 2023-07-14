@@ -2517,7 +2517,7 @@ var Authorizer_ServiceDesc = grpc.ServiceDesc{
 type RemoteSyncClient interface {
 	Login(ctx context.Context, in *RsAuthenticationRequest, opts ...grpc.CallOption) (*RsAuthenticationResponse, error)
 	Read(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsReadResponse, error)
-	Write(ctx context.Context, in *RsWriteRequest, opts ...grpc.CallOption) (*RsWriteResponse, error)
+	Write(ctx context.Context, in *RsWriteRequest, opts ...grpc.CallOption) (*messages.Ack, error)
 	GetLastModified(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsTimestampResponse, error)
 	GetLastWrite(ctx context.Context, in *RsLastWriteRequest, opts ...grpc.CallOption) (*RsTimestampResponse, error)
 	ReadDir(ctx context.Context, in *RsReadRequest, opts ...grpc.CallOption) (*RsReadDirResponse, error)
@@ -2549,8 +2549,8 @@ func (c *remoteSyncClient) Read(ctx context.Context, in *RsReadRequest, opts ...
 	return out, nil
 }
 
-func (c *remoteSyncClient) Write(ctx context.Context, in *RsWriteRequest, opts ...grpc.CallOption) (*RsWriteResponse, error) {
-	out := new(RsWriteResponse)
+func (c *remoteSyncClient) Write(ctx context.Context, in *RsWriteRequest, opts ...grpc.CallOption) (*messages.Ack, error) {
+	out := new(messages.Ack)
 	err := c.cc.Invoke(ctx, "/mixmessages.RemoteSync/Write", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2591,7 +2591,7 @@ func (c *remoteSyncClient) ReadDir(ctx context.Context, in *RsReadRequest, opts 
 type RemoteSyncServer interface {
 	Login(context.Context, *RsAuthenticationRequest) (*RsAuthenticationResponse, error)
 	Read(context.Context, *RsReadRequest) (*RsReadResponse, error)
-	Write(context.Context, *RsWriteRequest) (*RsWriteResponse, error)
+	Write(context.Context, *RsWriteRequest) (*messages.Ack, error)
 	GetLastModified(context.Context, *RsReadRequest) (*RsTimestampResponse, error)
 	GetLastWrite(context.Context, *RsLastWriteRequest) (*RsTimestampResponse, error)
 	ReadDir(context.Context, *RsReadRequest) (*RsReadDirResponse, error)
@@ -2608,7 +2608,7 @@ func (UnimplementedRemoteSyncServer) Login(context.Context, *RsAuthenticationReq
 func (UnimplementedRemoteSyncServer) Read(context.Context, *RsReadRequest) (*RsReadResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
 }
-func (UnimplementedRemoteSyncServer) Write(context.Context, *RsWriteRequest) (*RsWriteResponse, error) {
+func (UnimplementedRemoteSyncServer) Write(context.Context, *RsWriteRequest) (*messages.Ack, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Write not implemented")
 }
 func (UnimplementedRemoteSyncServer) GetLastModified(context.Context, *RsReadRequest) (*RsTimestampResponse, error) {
