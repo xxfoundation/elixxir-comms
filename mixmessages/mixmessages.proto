@@ -890,17 +890,17 @@ message RsAuthenticationRequest{
 }
 
 message RsAuthenticationResponse{
-    string Token = 1;
+    bytes Token = 1;
     int64  ExpiresAt = 2;
 }
 
 message RsReadRequest{
     string Path = 1;
-    string Token = 2;
+    bytes Token = 2;
 }
 
 message RsLastWriteRequest{
-    string Token = 1;
+    bytes Token = 1;
 }
 
 message RsReadResponse{
@@ -910,7 +910,7 @@ message RsReadResponse{
 message RsWriteRequest{
     string Path = 1;
     bytes Data = 2;
-    string Token = 3;
+    bytes Token = 3;
 }
 
 message RsReadDirResponse {
