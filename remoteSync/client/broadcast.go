@@ -8,6 +8,33 @@ import (
 	"gitlab.com/xx_network/comms/connect"
 )
 
+// Login to the server, receiving an authentication token
+func (rc *Comms) Login(host *connect.Host, msg *pb.RsAuthenticationRequest) (*pb.RsAuthenticationResponse, error) {
+	// Create the Send Function
+	f := func(conn connect.Connection) (*any.Any, error) {
+		// Set up the context
+		ctx, cancel := host.GetMessagingContext()
+		defer cancel()
+		// Send the message
+		resultMsg, err := pb.NewRemoteSyncClient(conn.GetGrpcConn()).
+			Login(ctx, msg)
+		if err != nil {
+			return nil, errors.New(err.Error())
+		}
+		return ptypes.MarshalAny(resultMsg)
+	}
+
+	// Execute the Send function
+	resultMsg, err := rc.Send(host, f)
+	if err != nil {
+		return nil, err
+	}
+
+	// Marshall the result
+	result := &pb.RsAuthenticationResponse{}
+	return result, ptypes.UnmarshalAny(resultMsg, result)
+}
+
 // Read a resource from a RemoteSync server.
 func (rc *Comms) Read(host *connect.Host, msg *pb.RsReadRequest) (*pb.RsReadResponse, error) {
 	// Create the Send Function
