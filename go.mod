@@ -8,11 +8,11 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/jwalterweatherman v1.1.0
-	gitlab.com/elixxir/crypto v0.0.7-0.20230214180106-72841fd1e426
-	gitlab.com/elixxir/primitives v0.0.3-0.20230214180039-9a25e2d3969c
-	gitlab.com/xx_network/comms v0.0.4-0.20230214180029-5387fb85736d
-	gitlab.com/xx_network/crypto v0.0.5-0.20230214003943-8a09396e95dd
-	gitlab.com/xx_network/primitives v0.0.4-0.20230215185311-cb80e2bfbfeb
+	gitlab.com/elixxir/crypto v0.0.7-0.20230720204508-ad84ed685918
+	gitlab.com/elixxir/primitives v0.0.3-0.20230720204156-9c2c66af3c87
+	gitlab.com/xx_network/comms v0.0.4-0.20230724171137-c281c75fe550
+	gitlab.com/xx_network/crypto v0.0.5-0.20230720190242-8c9a48eff1ea
+	gitlab.com/xx_network/primitives v0.0.4-0.20230718211916-dc1775b65941
 	gitlab.com/xx_network/ring v0.0.3-0.20220902183151-a7d3b15bc981
 	golang.org/x/crypto v0.5.0
 	golang.org/x/net v0.5.0
@@ -32,7 +32,7 @@ require (
 	github.com/soheilhy/cmux v0.1.5 // indirect
 	github.com/zeebo/blake3 v0.1.1 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/sys v0.10.0 // indirect
 	golang.org/x/text v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20220822174746-9e6da59bd2fc // indirect
 	nhooyr.io/websocket v1.8.7 // indirect
