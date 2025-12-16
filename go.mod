@@ -8,10 +8,10 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/jwalterweatherman v1.1.0
-	gitlab.com/elixxir/crypto v0.0.10
+	gitlab.com/elixxir/crypto v0.0.15
 	gitlab.com/elixxir/primitives v0.0.4
 	gitlab.com/xx_network/comms v0.0.6
-	gitlab.com/xx_network/crypto v0.0.6
+	gitlab.com/xx_network/crypto v0.0.11
 	gitlab.com/xx_network/primitives v0.0.5
 	gitlab.com/xx_network/ring v0.0.3
 	golang.org/x/crypto v0.16.0

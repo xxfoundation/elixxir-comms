@@ -10,7 +10,7 @@ package dataStructures
 // Define the network.Instance's group object and methods for creation and updating
 
 import (
-	"encoding/json"
+	json "github.com/goccy/go-json"
 	"github.com/pkg/errors"
 	"gitlab.com/elixxir/crypto/cyclic"
 	"gitlab.com/xx_network/crypto/large"
